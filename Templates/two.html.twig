@@ -1,0 +1,78 @@
+<li class="ff-item-type-{{class_ext}} file"  data-name="{{file}}" {% if((filter !='') and (not file in filter ))  %} style="display:none;"{% endif %}>
+    <figure data-name="{{file}}" data-type="{% if is_img %}img{% else %}file{% endif %}">
+        <a href="javascript:void('')" class="link" data-file="{{file}}" data-function="{{apply}}">
+            <div class="img-precontainer">
+                {% if is_icon_thumb %}<div class="filetype">{{ extension_lower }}</div>{% endif %}
+                <div class="img-container">
+                    <span></span>
+                    <img class="{{ show_original ? "original" : ""}}{{ is_icon_thumb ? " icon" : "" }}{{ lazy_loading_enabled ? " lazy-loaded" : ""}}" {{ lazy_loading_enabled ? "data-original" : "src" }} ="../{{ src_thumb }}" >
+                </div>
+            </div>
+            <div class="img-precontainer-mini {% if is_img %}original-thumb{% endif %}">                                    
+                <div class="filetype {{extension_lower}} {% if extension_lower in editable_text_file_exts %}edit-text-file-allowed{% endif %} {% if not is_icon_thumb %}hide{% endif %}">{{extension_lower}}</div>
+		<div class="img-container-mini">
+                    <span></span>
+                    {% if mini_src != "" %}					
+                        <img class="{{ show_original_mini ? "original" : "" }}{{ is_icon_thumb_mini ? " icon" : "" }}{{ lazy_loading_enabled ? " lazy-loaded" : ""}}" {{ lazy_loading_enabled ? "data-original" : "src" }} ="../{{ mini_src }}">
+                    {% endif %}
+		</div>
+            </div>				
+            {% if is_icon_thumb %}
+            <div class="cover"></div>
+            {% endif %}
+        </a>
+	<div class="box">
+            <h4 {% if ellipsis_title_after_first_row %}class="ellipsis"{% endif %}>
+                <a href="javascript:void('')" class="link" data-file="{{file}}" data-function="{{apply}}">
+                {{filename}}
+                </a>
+            </h4>
+        </div>
+        <input type="hidden" class="date" value="{{file_array.date}}"/>
+        <input type="hidden" class="size" value="{{file_array.size}}"/>
+        <input type="hidden" class="extension" value="{{extension_lower}}"/>
+        <input type="hidden" class="name" value="{{file_array.file_lcase}}"/>
+        <div class="file-date">{{ file_array.date | date('y/m/d')}}</div>
+        <div class="file-size">{{ file_array.makeSize }}</div>
+        <div class='img-dimension'>{% if is_img %}{{img_width}}x{{img_height}}{% endif %}</div>
+	<div class='file-extension'>{{extension_lower}}</div>
+	<figcaption>
+            <form action="/admin/filemanager/download" method="post" class="download-form" id="form{{nu}}">
+                <input type="hidden" name="path" value="{{rfm_subfolder}}{{subdir}}"/>
+                <input type="hidden" class="name_download" name="name" value="{{file}}"/>
+                <a title="Download" class="tip-right" href="javascript:void('')" onclick="$('#form{{nu}}').submit();">
+                    <i class="icon-download"></i>
+                </a>
+                {% if is_img and src_thumb !="" and extension_lower !="tiff" and extension_lower!="tif" %}
+                    <a class="tip-right preview" title="Preview" data-url="{{src}}" data-toggle="lightbox" href="#previewLightbox">
+                        <i class=" icon-eye-open"></i>
+                    </a>
+                {% elseif (is_video or is_audio) and extension_lower in jplayer_ext %}		                                   
+                    <a class="tip-right modalAV {% if is_audio %}audio{% else %}video{% endif %}" title="Preview" data-url="/admin/filemanager/ajax/MediaPreview?title={{filename}}&file={{current_path}}{{rfm_subfolder}}{{subdir}}{{file}}" href="javascript:void('');" >
+                        <i class=" icon-eye-open"></i>
+                    </a>
+                {% elseif preview_text_files and extension_lower in previewable_text_file_exts %}                
+                    <a class="tip-right file-preview-btn" title="Preview" data-url="/admin/filemanager/ajax/GetFile?sub_action=preview&preview_mode=text&title={{filename}}&file={{current_path}}{{rfm_subfolder}}{{subdir}}{{file}}" href="javascript:void('');" >
+                        <i class=" icon-eye-open"></i>
+                    </a>
+                {#{% elseif googledoc_enabled and extension_lower in googledoc_file_exts %}                
+                    <a class="tip-right file-preview-btn" title="Preview" data-url="/admin/filemanager/ajax/GetFile?sub_action=preview&preview_mode=google&title={{filename}}&file={{current_path}}{{rfm_subfolder}}{{subdir}}{{file}}" href="docs.google.com;" >
+                        <i class=" icon-eye-open"></i> 
+                    </a>#}
+                {#{% elseif viewerjs_enabled and extension_lower in viewerjs_file_exts %}                
+                    <a class="tip-right file-preview-btn" title="Preview" data-url="/admin/filemanager/ajax/GetFile?sub_action=preview&preview_mode=viewerjs&title={{filename}}&file={{current_path}}{{rfm_subfolder}}{{subdir}}{{file}}" href="docs.google.com;" >
+                        <i class=" icon-eye-open"></i>
+                    </a>#}
+                {% else %}                
+                    <a class="preview disabled"><i class="icon-eye-open icon-white"></i></a>
+                {% endif %}
+                <a href="javascript:void('')" class="tip-left edit-button rename-file-paths {% if((rename_files) and not (file_prevent_rename)) %}rename-file{% endif %}" title="Rename" data-path="{{rfm_subfolder}}{{subdir}}{{file}}" data-thumb="{{thumbs_path}}{{subdir}}{{file}}">
+                <i class="icon-pencil {% if(not rename_folders or file_prevent_rename) %}icon_white{% endif %}"></i></a>
+
+                <a href="javascript:void('')" class="tip-left erase-button {% if((delete_files) and not (file_prevent_delete)) %}delete-file{% endif %}" title="Erase" data-confirm="Are you sure to delete this file?" data-path="{{rfm_subfolder}}{{subdir}}{{file}}" data-thumb="{{thumbs_path}}{{subdir}}{{file}}">
+                <i class="icon-trash {% if(not delete_folders or file_prevent_delete) %}icon_white{% endif %}"></i>
+                </a>
+            </form>
+        </figcaption>
+    </figure>
+</li>
