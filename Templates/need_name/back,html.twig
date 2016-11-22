@@ -1,0 +1,21 @@
+<li data-name="{{ file }}" class="back" {% if((filter !='') and (not file in filter ))  %} style="display:none;"{% endif %}>
+    <figure data-name="{{ file }}" class="back-directory" data-type="">			    
+        <input type="hidden" class="path" value=""/>
+	<input type="hidden" class="path_thumb" value=""/>
+	<a class="folder-link" href="{{ temp_attr.folder_link }}">
+        <div class="img-precontainer">
+            <div class="img-container directory"><span></span>
+                <img class="directory-img"  src="../img/{{icon_theme}}/folder_back.png" />
+            </div>
+        </div>
+        <div class="img-precontainer-mini directory">
+            <div class="img-container-mini"><span></span>
+                <img class="directory-img"  src="../img/{{icon_theme}}/folder_back.png" />
+            </div>
+        </div>			
+        <div class="box no-effect">
+            <h4><?php echo trans('Back') ?></h4>
+        </div>
+        </a>
+    </figure>
+</li>
