@@ -1,0 +1,38 @@
+<li data-name="{{ file }}" class="dir" {% if((filter !='') and (not file in filter ))  %} style="display:none;"{% endif %}>
+    <figure data-name="{{ file }}" class="directory" data-type="dir">			    
+        <a class="folder-link" href="{{ temp_attr.folder_link }}">
+            <div class="img-precontainer">
+                <div class="img-container directory"><span></span>
+                    <img class="directory-img"  src="../img/{{ icon_theme }}/folder.png" />
+                </div>
+            </div>
+            <div class="img-precontainer-mini directory">
+                <div class="img-container-mini"><span></span>
+                    <img class="directory-img"  src="../img/{{ icon_theme }}/folder.png" />
+                </div>
+            </div>
+        </a>
+        <div class="box">            
+            <h4 {% if(ellipsis_title_after_first_row) %}class="ellipsis"{% endif %} >
+                <a class="folder-link" data-file="{{file }}" href="{{ temp_attr.folder_link }}">{{ file | raw }}</a>
+            </h4>
+        </div>
+        <input type="hidden" class="name" value="{{ file_array.file_lcase }}" />
+        <input type="hidden" class="date" value="{{file_array.date}}"/>
+        <input type="hidden" class="size" value="{{file_array.size}}"/>
+        <input type="hidden" class="extension" value="dir"/>
+        <div class="file-date">{{ file_array.date | date('y/m/d')}}</div>
+          {% if(show_folder_size) %}
+              <div class="file-size"><?php echo makeSize($file_array['size'])?></div>
+          {% endif %}          
+        <div class='file-extension'>dir</div>
+        <figcaption>            
+            <a href="javascript:void('')" class="tip-left edit-button rename-file-paths {% if((rename_folders) and not (file_prevent_rename)) %}rename-folder{% endif %}" title="Rename" data-path="{{rfm_subfolder}}{{subdir}}{{file}}" data-thumb="{{thumbs_path}}{{subdir}}{{file}}">
+                <i class="icon-pencil {% if(not rename_folders or file_prevent_rename) %}icon_white{% endif %}"></i>
+            </a>
+            <a href="javascript:void('')" class="tip-left erase-button {% if((delete_folders) and not (file_prevent_delete)) %}delete-folder{% endif %}" title="Erase" data-confirm="Are you sure to delete the folder and all the elements in it?" data-path="{{rfm_subfolder}}{{subdir}}{{file}}"  data-thumb="{{thumbs_path}}{{subdir}}{{file}}">
+                <i class="icon-trash {% if(not delete_folders or file_prevent_delete) %}icon_white{% endif %}"></i>
+            </a>
+        </figcaption>
+    </figure>
+</li>
