@@ -444,7 +444,7 @@ public function two($app, $files, $twigArr, $config, $subdir, $filter, $translit
                       if(!$util->create_img($file_path, $src_thumb, 122, 91)){
                           $src_thumb=$mini_src="";
                       }else{
-                          $util->new_thumbnails_creation($this->current_path.$rfm_subfolder.$subdir,$file_path,$file,$this->current_path,'','','','','','','',$fixed_image_creation,$fixed_path_from_filemanager,$fixed_image_creation_name_to_prepend,$fixed_image_creation_to_append,$fixed_image_creation_width,$fixed_image_creation_height,$fixed_image_creation_option);
+//                          $util->new_thumbnails_creation($this->current_path.$rfm_subfolder.$subdir,$file_path,$file,$this->current_path,'','','','','','','',$confixed_image_creation,$fixed_path_from_filemanager,$fixed_image_creation_name_to_prepend,$fixed_image_creation_to_append,$fixed_image_creation_width,$fixed_image_creation_height,$fixed_image_creation_option);
                       }
                   } catch (Exception $e) {
                       $src_thumb=$mini_src="";
@@ -540,7 +540,7 @@ public function two($app, $files, $twigArr, $config, $subdir, $filter, $translit
         //var_dump($twigArr['subdir']);
         $twigArr['file_array']['makeSize'] = $util->makeSize($file_array['size']);
         if((!($_GET['type']==1 && !$is_img) && !(($_GET['type']==3 && !$is_video) && ($_GET['type']==3 && !$is_audio))) && $class_ext > 0){            
-            $template = 'FileManager/two/two.html.twig';
+            $template = 'FileManager/two.html.twig';
             $html = $html . $app['twig']->render($template, $twigArr); //template!
         }
     }    

@@ -13,7 +13,7 @@ class Chmod {
         if (
                 (is_dir($path) && $c['chmod_dirs'] === false)
                 || (is_file($path) && $c['chmod_files'] === false)
-                || (is_function_callable("chmod") === false) )
+                || ($util->is_function_callable("chmod") === false) )
         {
                 $this->r=array(sprintf('Changing %s permissions are not allowed.', (is_dir($path) ? 'folders' : 'files')),403);
                 return;

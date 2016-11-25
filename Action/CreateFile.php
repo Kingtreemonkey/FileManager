@@ -11,7 +11,7 @@ class CreateFile {
         $path_thumb = $parent->path_thumb;
         $name = $parent->name;
         $util = new Utility();
-        if ($create_text_files === FALSE) {
+        if ($config['create_text_files'] === FALSE) {
                 $this->r = array('You are not allowed to edit this file.', 403);
                 return;
             }
