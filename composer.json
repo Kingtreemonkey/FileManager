@@ -1,6 +1,7 @@
 {
     "name": "Rabies/Filemanager",
     "description": "Completely Responsive Filemanager with integration for tinyMCE and Silex backend",
+    "keywords": ["filemanager","silex","tinymce"],
     "license": "Creative Commons Attribution-NonCommercial 3.0 Unported License",
     "authors": [
         {
@@ -9,6 +10,6 @@
         }
     ],
     "require": {
-        "php": ">=5.3.0",
+        "php": ">=5.3.0"
     }
 }
