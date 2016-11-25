@@ -1,0 +1,14 @@
+{
+    "name": "Rabies/Filemanager",
+    "description": "Completely Responsive Filemanager with integration for tinyMCE and Silex backend",
+    "license": "Creative Commons Attribution-NonCommercial 3.0 Unported License",
+    "authors": [
+        {
+            "name": "Xpycts",
+            "homepage": "https://github.com/Xpycts/FileManager"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0",
+    }
+}
