@@ -1,5 +1,5 @@
 {
-    "name": "Rabies/Filemanager",
+    "name": "rabies/filemanager",
     "description": "Completely Responsive Filemanager with integration for tinyMCE and Silex backend",
     "keywords": ["filemanager","silex","tinymce"],
     "license": "Creative Commons Attribution-NonCommercial 3.0 Unported License",
