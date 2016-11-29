@@ -90,7 +90,7 @@ class Upload{
                                         $memory_error = FALSE;
                                 }else{
                                         // TODO something with this long function baaaah...
-                                        if( ! $util->new_thumbnails_creation($targetPath,$targetFile,$_FILES['file']['name'],$current_path,$relative_image_creation,$relative_path_from_current_pos,$relative_image_creation_name_to_prepend,$relative_image_creation_name_to_append,$relative_image_creation_width,$relative_image_creation_height,$relative_image_creation_option,$fixed_image_creation,$fixed_path_from_filemanager,$fixed_image_creation_name_to_prepend,$fixed_image_creation_to_append,$fixed_image_creation_width,$fixed_image_creation_height,$fixed_image_creation_option))
+                                        if( ! $util->new_thumbnails_creation($targetPath,$targetFile,$_FILES['file']['name'],$current_path,$config['relative_image_creation'],$config['relative_path_from_current_pos'],$config['relative_image_creation_name_to_prepend'],$config['relative_image_creation_name_to_append'],$config['relative_image_creation_width'],$config['relative_image_creation_height'],$config['relative_image_creation_option'],$config['fixed_image_creation'],$config['fixed_path_from_filemanager'],$config['fixed_image_creation_name_to_prepend'],$config['fixed_image_creation_to_append'],$config['fixed_image_creation_width'],$config['fixed_image_creation_height'],$config['fixed_image_creation_option']))
                                         {
                                                 $memory_error = FALSE;
                                         }
@@ -100,32 +100,32 @@ class Upload{
                                                 $srcWidth = $imginfo[0];
                                                 $srcHeight = $imginfo[1];
                                                 // resize images if set
-                                                if ($image_resizing)
+                                                if ($config['image_resizing'])
                                                 {
-                                                        if ($image_resizing_width == 0) // if width not set
+                                                        if ($config['image_resizing_width ']== 0) // if width not set
                                                         {
-                                                                if ($image_resizing_height == 0)
+                                                                if ($config['image_resizing_height'] == 0)
                                                                 {
-                                                                        $image_resizing_width = $srcWidth;
-                                                                        $image_resizing_height = $srcHeight;
+                                                                        $config['image_resizing_width'] = $srcWidth;
+                                                                        $config['image_resizing_height'] = $srcHeight;
                                                                 }
                                                                 else
                                                                 {
-                                                                        $image_resizing_width = $image_resizing_height*$srcWidth/$srcHeight;
+                                                                        $config['image_resizing_width'] = $config['image_resizing_height']*$srcWidth/$srcHeight;
                                                                 }
                                                         }
-                                                        elseif ($image_resizing_height == 0) // if height not set
+                                                        elseif ($config['image_resizing_height'] == 0) // if height not set
                                                         {
-                                                                $image_resizing_height = $image_resizing_width*$srcHeight/$srcWidth;
+                                                                $config['image_resizing_height'] = $config['image_resizing_width']*$srcHeight/$srcWidth;
                                                         }
                                                         // new dims and create
-                                                        $srcWidth = $image_resizing_width;
-                                                        $srcHeight = $image_resizing_height;
-                                                        $util->create_img($targetFile, $targetFile, $image_resizing_width, $image_resizing_height, $image_resizing_mode);
+                                                        $srcWidth = $config['image_resizing_width'];
+                                                        $srcHeight = $config['image_resizing_height'];
+                                                        $util->create_img($targetFile, $targetFile, $config['image_resizing_width'], $config['image_resizing_height'], $config['image_resizing_mode']);
                                                 }
                                                 //max resizing limit control
                                                 $resize = FALSE;
-                                                if ($image_max_width != 0 && $srcWidth > $image_max_width && $image_resizing_override === FALSE)
+                                                if ($image_max_width != 0 && $srcWidth > $image_max_width && $config['image_resizing_override'] === FALSE)
                                                 {
                                                         $resize = TRUE;
                                                         $srcWidth = $image_max_width;
@@ -133,7 +133,7 @@ class Upload{
                                                             $srcHeight = $image_max_width*$srcHeight/$srcWidth;
                                                         }
                                                 }
-                                                if ($image_max_height != 0 && $srcHeight > $image_max_height && $image_resizing_override === FALSE){
+                                                if ($image_max_height != 0 && $srcHeight > $image_max_height && $config['image_resizing_override'] === FALSE){
                                                         $resize = TRUE;
                                                         $srcHeight = $image_max_height;
                                                         if ($image_max_width == 0){
